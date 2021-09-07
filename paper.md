@@ -25,11 +25,11 @@ bibliography: paper.bib
 Whether it is seismic surveys, ECG signals, stock market trends, or sensor data, the wavelet and wavelet packet transforms are powerful tools for signal analysis and classification with many advantages over the conventional Fourier methods. Primary among them is the ability to extract information localized in both time and frequency domains, enabling multiresolution analysis [@Daubechies:1992; @Mallat:2009]. As such, wavelets and wavelet packets have become popular tools for computational harmonic analysis. `WaveletsExt.jl` was developed to enrich the wavelet toolbox for Julia by providing routines for wavelet analysis, wavelet packet analysis, and associated utilities.
 
 # Statement of Need
-The principle package for wavelets in Julia is `Wavelets.jl` [JuliaDSP:2021], which provides the essential building blocks for data analysis using wavelets. These include 1-D, 2-D, and 3-D wavelet transforms via filter banks or lifting, a range of thresholding functions, and other utilities. However, as a general-purpose package for wavelets, `Wavelets.jl` does not include many targeted and sophisticated methods present in the literature.
+The principle package for wavelets in Julia is `Wavelets.jl` [@JuliaDSP:2021], which provides the essential building blocks for data analysis using wavelets. These include 1-D, 2-D, and 3-D wavelet transforms via filter banks or lifting, a range of thresholding functions, and other utilities. However, as a general-purpose package for wavelets, `Wavelets.jl` does not include many targeted and sophisticated methods present in the literature.
 
 `WaveletsExt.jl` (Wavelets Extension) is written to enlarge the wavelet toolbox for Julia by providing a host of wavelet routines such as stationary wavelet transform [@Nason:1995], autocorrelation wavelet transform [@Saito:1993], local discriminant basis [@Saito:1995], and shift-invariant wavelet packet decomposition [@Cohen:1995]. The package also contains denoising utilities such as SureShrink [@Donoho:1995a] and Relative Error Shrink [@Irion:2017] as well as several features for data visualization.
 
-One of the most distinguishing features of `WaveletsExt.jl` is the presence of algorithms for handling an ensemble of input signals. Currently, `Wavelets.jl` implements best basis selection utilities for wavelet packets for single inputs. However, it does not include methods for selecting a single best basis for a set of inputs with similar properties (e.g signals or images belonging to the same class), which is valuable for feature extraction and data compression. To address this, `WaveletsExt.jl` implements joint best basis [@Wickerhauser:1996] and Least Statistically Dependent Basis (LSDB) [Saito:1998] which are approximations of Prinicple Component Analysis (PCA) and Independent Component Analysis (ICA) respectively obtained using a dictionary of orthonormal bases.
+One of the most distinguishing features of `WaveletsExt.jl` is the presence of algorithms for handling an ensemble of input signals. Currently, `Wavelets.jl` implements best basis algorithm for wavelet packets in single inputs. However, it does not include methods for selecting a single best basis for a set of inputs with similar properties (e.g signals or images belonging to the same class), which is valuable for feature extraction and data compression. To address this, `WaveletsExt.jl` implements the joint best basis (JBB) [@Wickerhauser:1996] and the Least Statistically Dependent Basis (LSDB) [Saito:1998] which are approximations of Prinicple Component Analysis (PCA) and Independent Component Analysis (ICA) respectively obtained via a dictionary of orthonormal bases.
 
 # Examples
 ## 1. Redundant Wavelet Transforms
@@ -54,7 +54,7 @@ p2 = wiggle(y, sc=0.7) |> p -> plot!(p, title="Stationary WT")
 p = plot(p1, p2, layout=(1,2), size=(600,300))
 savefig(p, "transforms.png")
 ```
-![Coefficients of every level of the autocorrelation wavelet transform and stationary wavelet transform on a unit impulse signal. \label{fig:transforms}](transforms.png)
+!["Wiggle" plots displaying the value of coefficients in each level of the autocorrelation and stationary wavelet transform for a unit impulse signal. \label{fig:transforms}](transforms.png)
 
 ## Best Basis Algorithms
 `WaveletsExt.jl` can select a single best basis for set of signals has via Joint Best Basis (JBB) and Least Statistically Dependent Basis (LSDB). Users may also visualize the resulting best basis tree using `plot_tfbdry`.
