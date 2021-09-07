@@ -6,7 +6,7 @@ tags:
 authors:
   - name: Zeng Fung Liew^[co-first author] 
     affiliation: "1" 
-  - name: Shozen Dan^[co-first author]^[corresponding author]
+  - name: Shozen Dan^[co-first author, corresponding author]
     affiliation: "2"
   - name: Naoki Saito
     affiliation: "3"
