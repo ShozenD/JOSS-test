@@ -27,7 +27,7 @@ Whether it is seismic surveys, ECG signals, stock market trends, or sensor data,
 # Statement of Need
 The principle package for wavelets in Julia is `Wavelets.jl` [JuliaDSP:2021], which provides the essential building blocks for data analysis using wavelets. These include 1-D, 2-D, and 3-D wavelet transforms via filter banks or lifting, a range of thresholding functions, and other utilities. However, as a general-purpose package for wavelets, `Wavelets.jl` does not include many targeted and sophisticated methods present in the literature.
 
-`WaveletsExt.jl` (Wavelets Extension) is written to enlarge the wavelet toolbox for Julia by providing a host of wavelet routines such as stationary wavelet transform [@Nason:1995], autocorrelation wavelet transform [@Saito:1993], local discriminant basis [@Saito:1995], and shift-invariant wavelet packet decomposition [@Cohen:1995]. The package also contains denoising utilities such as SureShrink [@Donoho:1995] and Relative Error Shrink [@Irion:2017] as well as several features for data visualization.
+`WaveletsExt.jl` (Wavelets Extension) is written to enlarge the wavelet toolbox for Julia by providing a host of wavelet routines such as stationary wavelet transform [@Nason:1995], autocorrelation wavelet transform [@Saito:1993], local discriminant basis [@Saito:1995], and shift-invariant wavelet packet decomposition [@Cohen:1995]. The package also contains denoising utilities such as SureShrink [@Donoho:1995a] and Relative Error Shrink [@Irion:2017] as well as several features for data visualization.
 
 One of the most distinguishing features of `WaveletsExt.jl` is the presence of algorithms for handling an ensemble of input signals. Currently, `Wavelets.jl` implements best basis selection utilities for wavelet packets for single inputs. However, it does not include methods for selecting a single best basis for a set of inputs with similar properties (e.g signals or images belonging to the same class), which is valuable for feature extraction and data compression. To address this, `WaveletsExt.jl` implements joint best basis [@Wickerhauser:1996] and Least Statistically Dependent Basis (LSDB) [Saito:1998] which are approximations of Prinicple Component Analysis (PCA) and Independent Component Analysis (ICA) respectively obtained using a dictionary of orthonormal bases.
 
@@ -163,11 +163,11 @@ p2 = plot_tfbdry(ldb.tree)
 p = plot(p1, p2, size=(600,300))
 savefig(p, "ldb.png")
 ```
-![Left: Examples of Cylinder, Bell, and Funnel signals. Right: The best basis tree selected by the LDB algorithm for discriminating the three classes of signals. \label{fig:denoising}](denoising.png)
+![Left: Examples of Cylinder, Bell, and Funnel signals. Right: The best basis tree selected by the LDB algorithm for discriminating the three classes of signals. \label{fig:denoising}](ldb.png)
 
 # Reproducible Research
 
-`WaveletsExt.jl` was partially inspired by the WaveLab library in MATLAB which was developed with the goal of enabling reproducible wavelets research [@Donoho:1995]. In this spirit, we wrote a series of tutorials, examples, and experiments using `Pluto.jl`, a platform with which Julia users can build and share reactive documents [@Fonsp:2021]. By downloading and running Pluto notebooks, researchers and students alike can not only reproduce the results of our research but also interactively adjust parameters and see the changes in experiment outcomes.
+`WaveletsExt.jl` was partially inspired by the WaveLab library in MATLAB which was developed with the goal of enabling reproducible wavelets research [@Donoho:1995b]. In this spirit, we wrote a series of tutorials, examples, and experiments using `Pluto.jl`, a platform with which Julia users can build and share reactive documents [@Fonsp:2021]. By downloading and running Pluto notebooks, researchers and students alike can not only reproduce the results of our research but also interactively adjust parameters and see the changes in experiment outcomes.
 
 - Denoising Experiments using Wavelet Transforms, Autocorrelation Wavelet Transforms, Stationary Wavelet Transforms [@Liew:2021]
 
