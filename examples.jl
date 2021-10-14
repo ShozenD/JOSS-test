@@ -97,8 +97,7 @@ bell = wiggle(X[:,101:105], sc=0.3)
 plot!(bell, yticks=1:5, title="Bell signals")
 funnel = wiggle(X[:,201:205], sc=0.3)
 plot!(funnel, yticks=1:5, title="Funnel signals")
-p = plot(cylinder, bell, funnel, layout=(3,1))
-savefig(p, "cyl_bel_fun.png")
+p1 = plot(cylinder, bell, funnel, layout=(3,1))
 
 # Define Local Discriminant Basis object (`n_features` can be tweaked depending on the
 # number of desired features to be used as input into classification model)
@@ -115,6 +114,8 @@ ldb = LocalDiscriminantBasis(wt=wt,
 X̂ = fit_transform(ldb, X, y)
 
 # Plot the best basis for feature extraction
-p = plot_tfbdry(ldb.tree, nd_col=:black, ln_col=:black, bg_col=:white)
-plot!(p, title="Basis Selection using LDB")
+p2 = plot_tfbdry(ldb.tree, nd_col=:black, ln_col=:black, bg_col=:white)
+plot!(p2, title="Basis Selection using LDB")
+
+p = plot(p1, p2, size=(600,300))
 savefig(p, "ldb.png")
