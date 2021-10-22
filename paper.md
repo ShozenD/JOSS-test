@@ -22,18 +22,18 @@ bibliography: paper.bib
 ---
 
 # Summary
-Whether it is seismic surveys, ECG signals, stock market trends, or sensor data, the wavelet and wavelet packet transforms are powerful tools for signal analysis and classification with many advantages over the conventional Fourier methods. Primary among them is the ability to extract information localized in both time and frequency domains, enabling multiresolution analysis [@Daubechies:1992, @Mallat:2009]. As such, wavelets and wavelet packets have become popular tools for computational harmonic analysis. `WaveletsExt.jl` was developed to augment `Wavelets.jl` (the existing wavelet toolbox for Julia) by providing routines for wavelet analysis, wavelet packet analysis, and associated utilities.
+Whether it is seismic surveys, ECG signals, stock market trends, or sensor data, the wavelet and wavelet packet transforms are powerful tools for signal analysis and classification with many advantages over the conventional Fourier methods. Primary among them is the ability to extract information localized in both time and frequency domains, enabling multiresolution analysis `[@Daubechies:1992, @Mallat:2009]`. As such, wavelets and wavelet packets have become popular tools for computational harmonic analysis. `WaveletsExt.jl` was developed to augment `Wavelets.jl` (the existing wavelet toolbox for Julia) by providing routines for wavelet analysis, wavelet packet analysis, and associated utilities.
 
 # Statement of Need
 Julia's principle package for wavelets is `Wavelets.jl` [@JuliaDSP:2021], which provides the essential building blocks for data analysis using wavelets. These include 1-D, 2-D, and 3-D wavelet transforms via filter banks or lifting, a range of thresholding functions, and other utilities. However, as a general-purpose package for wavelets, `Wavelets.jl` does not include many targeted and sophisticated methods present in the literature.
 
-`WaveletsExt.jl` (Wavelets Extension) enlarges the wavelet toolbox for Julia by providing a host of wavelet routines such as Stationary Wavelet Transform `[@Nason:1995]`, Autocorrelation Wavelet Transform `[@Saito:1993]`, Local Discriminant Basis `[@Saito:1995]`, and Shift-invariant Wavelet Packet Decomposition `[@Cohen:1995]`. The package also contains denoising utilities such as SureShrink`[@Donoho:1995]` and Relative Error Shrink`[@Irion:2017]` as well as several data visualization features.
+`WaveletsExt.jl` (Wavelets Extension) enlarges the wavelet toolbox for Julia by providing a host of wavelet routines such as Stationary Wavelet Transform [@Nason:1995], Autocorrelation Wavelet Transform [@Saito:1993], Local Discriminant Basis [@Saito:1995], and Shift-invariant Wavelet Packet Decomposition [@Cohen:1995]. The package also contains denoising utilities such as SureShrink [@Donoho:1995] and Relative Error Shrink [@Irion:2017] as well as several data visualization features.
 
-One of the most distinguishing features of `WaveletsExt.jl` is the presence of algorithms for handling an ensemble of input signals. Currently, `Wavelets.jl` implements best basis selection utilities for wavelet packets for single inputs. However, it does not include methods for selecting a single best basis for a set of inputs with similar properties (e.g., signals or images belonging to the same class), which is valuable for feature extraction and data compression. To address this, `WaveletsExt.jl` implements the joint best basis (JBB) `[@Wickerhauser:1996]` and the Least Statistically Dependent Basis (LSDB) `[@Saito:2001]`, which are approximations of the Principal Component Analysis (PCA) and Independent Component Analysis (ICA) respectively, obtained via a dictionary of orthonormal bases.
+One of the most distinguishing features of `WaveletsExt.jl` is the presence of algorithms for handling an ensemble of input signals. Currently, `Wavelets.jl` implements best basis selection utilities for wavelet packets for single inputs. However, it does not include methods for selecting a single best basis for a set of inputs with similar properties (e.g., signals or images belonging to the same class), which is valuable for feature extraction and data compression. To address this, `WaveletsExt.jl` implements the joint best basis (JBB) [@Wickerhauser:1996] and the Least Statistically Dependent Basis (LSDB) [@Saito:2001], which are approximations of the Principal Component Analysis (PCA) and Independent Component Analysis (ICA) respectively, obtained via a dictionary of orthonormal bases.
 
 # Examples
 ## 1. Redundant Wavelet Transforms
-`WaveletsExt.jl` implements several redundant wavelet transforms including Stationary Wavelet Transform (SWT) `[@Nason:1995]` and Autocorrelation Wavelet Transform (a special case of SWT) `[@Saito:1993]`. These transformations can be performed using the `acwt` and `sdwt` functions. Users can also visualize the resulting decomposition with the `wiggle` function.
+`WaveletsExt.jl` implements several redundant wavelet transforms including Stationary Wavelet Transform (SWT) [@Nason:1995] and Autocorrelation Wavelet Transform (a special case of SWT) [@Saito:1993]. These transformations can be performed using the `acwt` and `sdwt` functions. Users can also visualize the resulting decomposition with the `wiggle` function.
 
 ```julia
 using Plots, Wavelets, WaveletsExt
@@ -57,7 +57,7 @@ savefig(p, "transforms.png")
 !["Wiggle" plots displaying the value of coefficients in each level of the autocorrelation and stationary wavelet transform for a unit impulse signal. \label{fig:transforms}](transforms.png)
 
 ## Best Basis Algorithms
-`WaveletsExt.jl` can select a single best basis for set of signals through the Joint Best Basis (JBB) `[@Wickerhauser:1996]` or Least Statistically Dependent Basis (LSDB) `[@Saito:2001]` algorithms. The resulting best basis tree can be visualized using `plot_tfbdry`.
+`WaveletsExt.jl` can select a single best basis for set of signals through the Joint Best Basis (JBB) [@Wickerhauser:1996] or Least Statistically Dependent Basis (LSDB) [@Saito:2001] algorithms. The resulting best basis tree can be visualized using `plot_tfbdry`.
 
 ```julia
 using Plots, Wavelets, WaveletsExt
@@ -86,7 +86,7 @@ savefig(p, "bestbasis.png")
 ![The best basis trees of 100 noisy Heavy Sine signals selected by the JBB and LSDB algorithms. \label{fig:bestbasis}](bestbasis.png)
 
 ## Denoising Algorithms
-`WaveletsExt.jl` contains two functions for denoising: `denoise` and `denoiseall`. The former denoises a single signal whereas the is used to denoise a set of signals simultaneously. For more examples of denoising using `WaveletsExt.jl`, refer to Liew et al. (2021) `[@Liew:2021]`.
+`WaveletsExt.jl` contains two functions for denoising: `denoise` and `denoiseall`. The former denoises a single signal whereas the is used to denoise a set of signals simultaneously. For more examples of denoising using `WaveletsExt.jl`, refer to Liew et al. (2021) [@Liew:2021].
 
 ```julia
 using Plots, Wavelets, WaveletsExt
@@ -125,7 +125,7 @@ savefig(p, "denoising.png")
 ![Left: Heavy Sine signals with Gaussian noise. Right: Simultaneously denoised signals.  \label{fig:denoising}](denoising.png)
 
 ## Feature Extraction
-Users can extract distinguishing features of signals localized in time and frequency using the Local Discriminant Basis (LDB) algorithm. Further details can be found in the original paper by Saito (1995) `[@Saito:1995]` and the interactive tutorial by Dan et al. (2021) `[@Dan:2021]`.
+Users can extract distinguishing features of signals localized in time and frequency using the Local Discriminant Basis (LDB) algorithm. Further details can be found in the original paper by Saito (1995) [@Saito:1995] and the interactive tutorial by Dan et al. (2021) [@Dan:2021].
 
 ```julia
 using Plots, Wavelets, WaveletsExt
@@ -167,11 +167,11 @@ savefig(p, "ldb.png")
 ![Left: Examples of Cylinder, Bell, and Funnel signals. Right: The best basis tree selected by the LDB algorithm for discriminating the three classes of signals. \label{fig:denoising}](ldb.png)
 
 # Reproducible Research
-`WaveletsExt.jl` was partially inspired by the WaveLab library in MATLAB, which was developed to enable reproducible wavelets research `[@Donoho:1995]`. In this spirit, we wrote a series of tutorials, examples, and experiments using `Pluto.jl`, a platform with which Julia users can create and share reactive documents `[@Fonsp:2021]`. By downloading and running these so-called Pluto notebooks, researchers and students alike can reproduce the results of our research and interactively adjust parameters to see the changes in experiment outcome.
+`WaveletsExt.jl` was partially inspired by the WaveLab library in MATLAB, which was developed to enable reproducible wavelets research [@Donoho:1995]. In this spirit, we wrote a series of tutorials, examples, and experiments using `Pluto.jl`, a platform with which Julia users can create and share reactive documents [@Fonsp:2021]. By downloading and running these so-called Pluto notebooks, researchers and students alike can reproduce the results of our research and interactively adjust parameters to see the changes in experiment outcome.
 
-- Denoising Experiments using Wavelet Transforms, Autocorrelation Wavelet Transforms, Stationary Wavelet Transforms `[@Liew:2021]`
+- Denoising Experiments using Wavelet Transforms, Autocorrelation Wavelet Transforms, Stationary Wavelet Transforms [@Liew:2021]
 
-- Feature Extraction using Local Discriminant Bases for Signal Classification `[@Dan:2021]`
+- Feature Extraction using Local Discriminant Bases for Signal Classification [@Dan:2021]
 
 # Acknowledgements
 This project was partially supported by the following grants from the US National Science Foundation: DMS-1148643; DMS-1418779; DMS-1912747; and CCF-1934568.
